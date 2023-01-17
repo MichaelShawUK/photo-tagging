@@ -123,7 +123,7 @@ const App = () => {
             alt=""
           />
         </map>
-        <div id="characters">
+        <motion.div id="characters" animate={{ y: [0, -50, 0, -50, 0] }}>
           {characters.map((character) => {
             return (
               <Character
@@ -133,7 +133,7 @@ const App = () => {
               />
             );
           })}
-        </div>
+        </motion.div>
       </div>
       {time && <Modal time={time} />}
     </div>
