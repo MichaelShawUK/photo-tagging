@@ -5,6 +5,7 @@ import cast from "./assets/img/simpsons.jpg";
 import characters from "./data/characters";
 import Character from "./components/Character";
 import { useState, useEffect } from "react";
+import Modal from "./components/Modal";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAgFgc5JvFhQBoxWHDkdOD4UHGDAD-Myyc",
@@ -49,6 +50,7 @@ const App = () => {
   };
 
   const [start, setStart] = useState(Date.now());
+  const [time, setTime] = useState(null);
 
   useEffect(() => {
     const characters = Object.keys(characterFound);
@@ -63,6 +65,7 @@ const App = () => {
     const time = Date.now() - start;
     console.log(time);
     console.log(Math.round(time / 10) / 100);
+    setTime(Math.round(time / 10) / 100);
   }, [characterFound, start]);
 
   return (
@@ -156,6 +159,7 @@ const App = () => {
           })}
         </div>
       </div>
+      <Modal time={time} />
     </div>
   );
 };
