@@ -123,17 +123,18 @@ const App = () => {
             alt=""
           />
         </map>
-        <motion.div id="characters" animate={{ y: [0, -50, 0, -50, 0] }}>
-          {characters.map((character) => {
+        <div id="characters">
+          {characters.map((character, index) => {
             return (
               <Character
                 key={character.name}
                 src={character.img}
                 found={characterFound[character.name]}
+                index={index}
               />
             );
           })}
-        </motion.div>
+        </div>
       </div>
       {time && <Modal time={time} />}
     </div>
