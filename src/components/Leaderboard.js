@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/img/logo.png";
 import { readData } from "../firestore";
+import { motion } from "framer-motion";
 
 const Leaderboard = () => {
   const [users, setUsers] = useState([]);
@@ -30,11 +31,17 @@ const Leaderboard = () => {
         <div id="board-body">
           {users.map((user, index) => {
             return (
-              <div className="user-entry" key={user.id}>
+              <motion.div
+                className="user-entry"
+                key={user.id}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: index / 10 }}
+              >
                 <div>{index + 1}</div>
                 <div>{user.name}</div>
                 <div>{user.time}</div>
-              </div>
+              </motion.div>
             );
           })}
         </div>
