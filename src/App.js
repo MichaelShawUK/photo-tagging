@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import Modal from "./components/Modal";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import Bubble from "./components/Bubble";
 
 const App = () => {
   const [characterFound, setCharacterFound] = useState(() => {
@@ -16,6 +17,10 @@ const App = () => {
     return initial;
   });
 
+  const [showQuote, setShowQuote] = useState(false);
+  const [quote, setQuote] = useState("");
+  const [coords, setCoords] = useState({ x: 0, y: 0 });
+
   const fadeCharacter = (character) => {
     setCharacterFound((prevState) => ({
       ...prevState,
@@ -25,6 +30,14 @@ const App = () => {
 
   const [start, setStart] = useState(Date.now());
   const [time, setTime] = useState(null);
+
+  const speechBubble = (quote, e) => {
+    console.log(e);
+    setShowQuote(true);
+    setQuote(quote);
+    setCoords({ x: e.clientX - 20, y: e.clientY + 20 });
+    setTimeout(() => setShowQuote(false), "500");
+  };
 
   useEffect(() => {
     const characters = Object.keys(characterFound);
@@ -56,70 +69,105 @@ const App = () => {
           alt="The Simpsons characters"
           id="full-cast"
           useMap="#characterMap"
-          onClick={(e) =>
-            console.log(e.nativeEvent.offsetX + ", " + e.nativeEvent.offsetY)
-          }
+          onClick={(e) => {
+            console.log(e);
+            console.log(e.nativeEvent.screenX + ", " + e.nativeEvent.screenY);
+            setShowQuote(true);
+            setQuote("D'oh!");
+            setCoords({ x: e.clientX - 20, y: e.clientY + 20 });
+            setTimeout(() => setShowQuote(false), "500");
+          }}
           // onClick={() => console.log("INCORRECT")}
         ></img>
         <map name="characterMap">
           <area
             shape="rect"
             coords="562, 197, 649, 313"
-            onClick={() => fadeCharacter("willie")}
+            onClick={(e) => {
+              speechBubble("Willie!", e);
+              fadeCharacter("willie");
+            }}
             alt=""
           />
           <area
             shape="rect"
             coords="1482, 200, 1566, 338"
-            onClick={() => fadeCharacter("comicBookGuy")}
+            onClick={(e) => {
+              speechBubble("Worst app ever..", e);
+              fadeCharacter("comicBookGuy");
+            }}
             alt=""
           />
           <area
             shape="rect"
             coords="190, 219, 251, 318"
-            onClick={() => fadeCharacter("nelson")}
+            onClick={(e) => {
+              speechBubble("Ha ha!", e);
+              fadeCharacter("nelson");
+            }}
             alt=""
           />
           <area
             shape="rect"
             coords="1347, 500, 1390, 575"
-            onClick={() => fadeCharacter("millhouse")}
+            onClick={(e) => {
+              speechBubble("Everything's coming up Milhouse", e);
+              fadeCharacter("millhouse");
+            }}
             alt=""
           />
           <area
             shape="rect"
             coords="1019, 552, 1068, 662"
-            onClick={() => fadeCharacter("frink")}
+            onClick={(e) => {
+              speechBubble("Frink!", e);
+              fadeCharacter("frink");
+            }}
             alt=""
           />
           <area
             shape="rect"
             coords="1014, 359, 1096, 469"
-            onClick={() => fadeCharacter("wiggum")}
+            onClick={(e) => {
+              speechBubble("Wiggum!", e);
+              fadeCharacter("wiggum");
+            }}
             alt=""
           />
           <area
             shape="rect"
             coords="1201, 381, 1281, 522"
-            onClick={() => fadeCharacter("bob")}
+            onClick={(e) => {
+              speechBubble("Sideshow Bob", e);
+              fadeCharacter("bob");
+            }}
             alt=""
           />
           <area
             shape="rect"
             coords="1301, 417, 1361, 496"
-            onClick={() => fadeCharacter("moe")}
+            onClick={(e) => {
+              speechBubble("Moe", e);
+              fadeCharacter("moe");
+            }}
             alt=""
           />
           <area
             shape="rect"
             coords="1367, 167, 1440, 211"
-            onClick={() => fadeCharacter("snowball")}
+            onClick={(e) => {
+              speechBubble("Snowball", e);
+              fadeCharacter("snowball");
+            }}
             alt=""
           />
           <area
             shape="rect"
             coords="415, 410, 463, 512"
-            onClick={() => fadeCharacter("ned")}
+            onClick={(e) => {
+              speechBubble("Okily Dokily!", e);
+              fadeCharacter("ned");
+            }}
             alt=""
           />
         </map>
@@ -137,6 +185,7 @@ const App = () => {
         </div>
       </div>
       {time && <Modal time={time} />}
+      {showQuote && <Bubble quote={quote} x={coords.x} y={coords.y} />}
     </div>
   );
 };
