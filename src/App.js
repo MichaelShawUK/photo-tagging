@@ -70,17 +70,30 @@ const App = () => {
           id="full-cast"
           useMap="#characterMap"
           onClick={(e) => {
-            console.log(e);
-            console.log(e.nativeEvent.screenX + ", " + e.nativeEvent.screenY);
-            setShowQuote(true);
-            setQuote("D'oh!");
-            setCoords({ x: e.clientX - 20, y: e.clientY + 20 });
-            setTimeout(() => setShowQuote(false), "500");
+            speechBubble("D'oh!", e);
+            // console.log(e);
+            // console.log(e.nativeEvent.screenX + ", " + e.nativeEvent.screenY);
+            // setShowQuote(true);
+            // setQuote("D'oh!");
+            // setCoords({ x: e.clientX - 20, y: e.clientY + 20 });
+            // setTimeout(() => setShowQuote(false), "500");
           }}
           // onClick={() => console.log("INCORRECT")}
         ></img>
         <map name="characterMap">
-          <area
+          {characters.map((character) => (
+            <area
+              key={character.name}
+              shape="rect"
+              coords={character.coords}
+              onClick={(e) => {
+                speechBubble(character.quote, e);
+                fadeCharacter(character.name);
+              }}
+              alt=""
+            />
+          ))}
+          {/* <area
             shape="rect"
             coords="562, 197, 649, 313"
             onClick={(e) => {
@@ -111,8 +124,8 @@ const App = () => {
             shape="rect"
             coords="1347, 500, 1390, 575"
             onClick={(e) => {
-              speechBubble("Everything's coming up Milhouse", e);
-              fadeCharacter("millhouse");
+              speechBubble("Everything's coming up Milhouse!", e);
+              fadeCharacter("milhouse");
             }}
             alt=""
           />
@@ -169,7 +182,7 @@ const App = () => {
               fadeCharacter("ned");
             }}
             alt=""
-          />
+          /> */}
         </map>
         <div id="characters">
           {characters.map((character, index) => {
