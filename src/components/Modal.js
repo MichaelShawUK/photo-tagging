@@ -27,7 +27,7 @@ const Modal = ({ time }) => {
             type="text"
             placeholder="Enter Name"
             maxLength={17}
-            pattern="[a-zA-Z0-9!.]*"
+            pattern="[a-zA-Z0-9!. ]*"
           ></input>
           <button type="submit">Submit Score</button>
         </Form>
