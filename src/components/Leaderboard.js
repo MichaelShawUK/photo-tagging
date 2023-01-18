@@ -22,7 +22,7 @@ const Leaderboard = () => {
           <button>Home</button>
         </Link>
       </header>
-      <div>
+      <div id="board">
         <div id="board-headers">
           <div className="board-header"></div>
           <div className="board-header">Name</div>
@@ -38,7 +38,7 @@ const Leaderboard = () => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: index / 10 }}
               >
-                <div>{index + 1}</div>
+                <div id="position-col">{index + 1}</div>
                 <div>{user.name}</div>
                 <div>{user.time}</div>
               </motion.div>

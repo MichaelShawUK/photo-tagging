@@ -14,7 +14,6 @@ body {
   max-width: 1600px;
   margin: 0 auto;
   background: linear-gradient(45deg, #01abdc, #68c7ff, #01abdc);
-  /* background-color: #01abdc; */
 }
 
 #header {
@@ -30,7 +29,6 @@ body {
 #header button {
   border: none;
   padding: 0.5rem;
-  /* font-weight: bold; */
   background-color: #ffe70a;
   box-shadow: 0 0 5px black;
   border-radius: 5px;
@@ -65,12 +63,7 @@ body {
   opacity: 0.2;
 }
 
-/* @media (max-width: 500px) {
-  #header {
-    flex-direction: column;
-    align-items: center;
-  }
-} */
+/* Modal */
 
 .backdrop {
   position: fixed;
@@ -125,15 +118,47 @@ body {
   color: #ffe70a;
 }
 
+/* Leaderboard */
+
 #Leaderboard {
   min-height: 100vh;
+  font-size: 2rem;
+}
+
+#board {
+  width: 800px;
+  margin: 0 auto;
+  border: 2px solid black;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  margin-bottom: 3rem;
+}
+
+#board-headers {
+  background-color: #ffe70a;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  border-bottom: 2px solid black;
 }
 
 #board-headers,
 .user-entry {
   display: grid;
-  grid-template-columns: 1fr 2fr 2fr;
+  grid-template-columns: 1fr 4fr 2fr;
 }
+
+#position-col {
+  text-align: center;
+}
+
+.user-entry:nth-child(odd) {
+  background-color: white;
+}
+.user-entry:nth-child(even) {
+  background-color: #ddd;
+}
+
+/* Bubble */
 
 #bubble {
   width: 200px;
@@ -143,8 +168,6 @@ body {
   border-radius: 1rem;
   position: relative;
   box-shadow: 1px 1px 5px black;
-  /* border-bottom: 1px solid black;
-  border-right: 1px solid black; */
 }
 
 #bubble::before {
@@ -169,6 +192,4 @@ body {
 
 #bubble-container {
   position: absolute;
-  /* left: 100px; */
-  /* top: 100px; */
 }
